@@ -35,7 +35,7 @@ RUN echo "**** install ddclient ****" && \
   curl -o /tmp/ddclient.tar.gz -L "https://api.github.com/repos/ddclient/ddclient/tarball/" && \
   mkdir /tmp/ddclient && \
   tar xf /tmp/ddclient.tar.gz -C /tmp/ddclient --strip-components=1 && \
-  cd /tmp/ddclient && \
+  cd /tmp/ddclient 
 
 RUN echo "**** configuring ddclient ****" && \
   ./autogen && \
