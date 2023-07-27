@@ -34,10 +34,16 @@ RUN echo "***** install perl modules ****" && \
 RUN echo "**** install ddclient ****" && \
   curl -o /tmp/ddclient.tar.gz -L "https://api.github.com/repos/ddclient/ddclient/tarball/" && \
   tar xf /tmp/ddclient.tar.gz -C /tmp/ddclient --strip-components=1 && \
-  cp /tmp/ddclient/ddclient.in /usr/bin/ddclient.in && \
-  ln -s /usr/bin/ddclient.in /usr/bin/ddclient && \
-  mkdir -p /etc/ddclient/ && \
-  cp /tmp/ddclient/sample-get-ip-from-fritzbox /etc/ddclient/get-ip-from-fritzbox && \
+  cd /tmp/ddclient && \
+
+RUN echo "**** configuring ddclient ****" && \
+  ./autogen && \
+  ./configure --prefix=/usr --sysconfdir=/config --localstatedir=/var
+
+run echo "**** making ddclient ****" && \
+  make && \
+  make VERBOSE=1 check
+  make install
 
 RUN echo "**** cleanup ****" && \
   apk del --purge build-dependencies && \
