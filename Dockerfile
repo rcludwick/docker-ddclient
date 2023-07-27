@@ -40,9 +40,9 @@ RUN echo "**** configuring ddclient ****" && \
   ./autogen && \
   ./configure --prefix=/usr --sysconfdir=/config --localstatedir=/var
 
-run echo "**** making ddclient ****" && \
+RUN echo "**** making ddclient ****" && \
   make && \
-  make VERBOSE=1 check
+  make VERBOSE=1 check && \
   make install
 
 RUN echo "**** cleanup ****" && \
