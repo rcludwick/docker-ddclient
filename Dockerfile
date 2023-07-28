@@ -14,7 +14,7 @@ RUN \
   apk add --no-cache --virtual=build-dependencies \
     gcc \
     make \
-    aclocal \
+    automake \
     autoconf \
     wget && \
   echo "**** install runtime packages ****" && \
